@@ -1,0 +1,6 @@
+{
+    "require": {
+        "composer/installers": "~1.0",
+        "mobiledetect/mobiledetectlib": "^2.8"
+    }
+}

@@ -1,0 +1,12 @@
+.DS_Store
+.idea/
+node_modules
+npm-debug.log
+dist
+config.yml
+*.sass-cache*
+*.log
+*.swp
+*.sublime-workspace
+packaged/
+wpcs/
