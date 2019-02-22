@@ -4,103 +4,151 @@
  * Handles toggling the navigation menu for small screens and enables TAB key
  * navigation support for dropdown menus.
  */
-( function() {
-	var container, button, menu, links, i, len;
+( function( undefined ) {
 
-	container = document.getElementById( 'site-navigation' );
-	if ( ! container ) {
-		return;
-	}
+    var links,
+        container,
+        button,
+        menu,
+        i,
+        len;
 
-	button = container.getElementsByTagName( 'button' )[0];
-	if ( 'undefined' === typeof button ) {
-		return;
-	}
+    container = document.getElementById( 'site-navigation' );
 
-	menu = container.getElementsByTagName( 'ul' )[0];
+    if ( ! container ) {
+        return;
+    }
 
-	// Hide menu toggle button if menu is empty and return early.
-	if ( 'undefined' === typeof menu ) {
-		button.style.display = 'none';
-		return;
-	}
+    button = container.querySelector( 'button' ); // querySelector will automatically return the first match.
 
-	menu.setAttribute( 'aria-expanded', 'false' );
-	if ( -1 === menu.className.indexOf( 'nav-menu' ) ) {
-		menu.className += ' nav-menu';
-	}
+    if ( undefined === typeof button ) {
+        return;
+    }
 
-	button.onclick = function() {
-		if ( -1 !== container.className.indexOf( 'toggled' ) ) {
-			container.className = container.className.replace( ' toggled', '' );
-			button.setAttribute( 'aria-expanded', 'false' );
-			menu.setAttribute( 'aria-expanded', 'false' );
-		} else {
-			container.className += ' toggled';
-			button.setAttribute( 'aria-expanded', 'true' );
-			menu.setAttribute( 'aria-expanded', 'true' );
-		}
-	};
+    menu = container.querySelector( 'ul' );
 
-	// Get all the link elements within the menu.
-	links    = menu.getElementsByTagName( 'a' );
+    // Hide menu toggle button if menu is empty and return early.
+    if ( undefined === typeof menu ) {
+        button.style.display = 'none';
+        return;
+    }
 
-	// Each time a menu link is focused or blurred, toggle focus.
-	for ( i = 0, len = links.length; i < len; i++ ) {
-		links[i].addEventListener( 'focus', toggleFocus, true );
-		links[i].addEventListener( 'blur', toggleFocus, true );
-	}
+    menu.setAttribute( 'aria-expanded', 'false' );
 
-	/**
-	 * Sets or removes .focus class on an element.
-	 */
-	function toggleFocus() {
-		var self = this;
+    if ( ! menu.classList.contains( 'nav-menu' ) ) {
+        menu.classList.add( 'nav-menu' );
+    }
 
-		// Move up through the ancestors of the current link until we hit .nav-menu.
-		while ( -1 === self.className.indexOf( 'nav-menu' ) ) {
+    button.onclick = function() {
 
-			// On li elements toggle the class .focus.
-			if ( 'li' === self.tagName.toLowerCase() ) {
-				if ( -1 !== self.className.indexOf( 'focus' ) ) {
-					self.className = self.className.replace( ' focus', '' );
-				} else {
-					self.className += ' focus';
-				}
-			}
+        if ( container.classList.contains( 'toggled' ) ) {
 
-			self = self.parentElement;
-		}
-	}
+            container.classList.remove( 'toggled' );
 
-	/**
-	 * Toggles `focus` class to allow submenu access on tablets.
-	 */
-	( function( container ) {
-		var touchStartFn, i,
-			parentLink = container.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
+            button.setAttribute( 'aria-expanded', 'false' );
 
-		if ( 'ontouchstart' in window ) {
-			touchStartFn = function( e ) {
-				var menuItem = this.parentNode, i;
+            menu.setAttribute( 'aria-expanded', 'false' );
 
-				if ( ! menuItem.classList.contains( 'focus' ) ) {
-					e.preventDefault();
-					for ( i = 0; i < menuItem.parentNode.children.length; ++i ) {
-						if ( menuItem === menuItem.parentNode.children[i] ) {
-							continue;
-						}
-						menuItem.parentNode.children[i].classList.remove( 'focus' );
-					}
-					menuItem.classList.add( 'focus' );
-				} else {
-					menuItem.classList.remove( 'focus' );
-				}
-			};
+        } else {
 
-			for ( i = 0; i < parentLink.length; ++i ) {
-				parentLink[i].addEventListener( 'touchstart', touchStartFn, false );
-			}
-		}
-	}( container ) );
-} )();
+            container.classList.add( 'toggled' );
+
+            button.setAttribute( 'aria-expanded', 'true' );
+
+            menu.setAttribute( 'aria-expanded', 'true' );
+
+        }
+
+    };
+
+    // Get all the link elements within the menu.
+    links = menu.querySelectorAll( 'a' );
+
+    // Each time a menu link is focused or blurred, toggle focus.
+    links.forEach( function( link ) {
+
+        link.addEventListener( 'focus', toggleFocus, true );
+
+        link.addEventListener( 'blur', toggleFocus, true );
+
+    });
+
+    /**
+     * Sets or removes .focus class on an element.
+     */
+    function toggleFocus() {
+
+        var self = this;
+
+        // Move up through the ancestors of the current link until we hit .nav-menu.
+        while ( ! self.classList.contains( 'nav-menu' ) ) {
+
+            // On li elements toggle the class .focus.
+            if ( 'LI' === self.tagName ) {
+
+                if ( self.classList.contains( 'focus' ) ) {
+
+                    self.classList.remove( 'focus' );
+
+                } else {
+
+                    self.classList.add( 'focus' );
+
+                }
+
+            }
+
+            self = self.parentElement;
+
+        }
+
+    }
+
+    /**
+     * Toggles `focus` class to allow submenu access on tablets.
+     */
+    ( function( container ) {
+
+        var touchStartFn, i,
+parentLink = container.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
+
+        if ( 'ontouchstart' in window ) {
+
+            touchStartFn = function( e ) {
+
+                var i,
+menuItem = this.parentNode;
+
+                if ( ! menuItem.classList.contains( 'focus' ) ) {
+
+                    e.preventDefault();
+
+                    for ( i = 0; i < menuItem.parentNode.children.length; ++i ) {
+
+                        if ( menuItem === menuItem.parentNode.children[ i ]) {
+                            continue;
+                        }
+
+                        menuItem.parentNode.children[ i ].classList.remove( 'focus' );
+
+                    }
+
+                    menuItem.classList.add( 'focus' );
+
+                } else {
+
+                    menuItem.classList.remove( 'focus' );
+
+                }
+
+            };
+
+            parentLink.forEach( function( child ) {
+                child.addEventListener( 'touchstart', touchStartFn, false );
+            });
+
+        }
+
+    }( container ) );
+
+}() );

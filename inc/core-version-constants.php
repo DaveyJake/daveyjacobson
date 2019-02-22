@@ -4,14 +4,20 @@
  *
  * @since 1.0.0
  */
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! function_exists( 'script_constant_version' ) ) {
-	function script_constant_version( $package, $constant ) {
-		$version = json_decode( "../node_modules/{$package}/package.json" );
+	function script_constant_version( $package ) {
+        $data     = ABSTHEME . "node_modules/{$package}/package.json";
+		$pkg      = json_decode( file_get_contents( $data ) );
+        $version  = $pkg->version;
+        $constant = strtoupper( $package );
 
-		return ! defined( $constant ) && define( $constant, $version->version );
+		!defined( $constant ) && define( $constant, $version );
+
+        return true;
 	}
 }
 
 // Lodash
-script_constant_version( 'lodash', 'LODASH' );
+script_constant_version( 'lodash' );
