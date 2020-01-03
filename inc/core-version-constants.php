@@ -4,7 +4,7 @@
  *
  * @since 1.0.0
  */
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
 
 if ( ! function_exists( 'script_constant_version' ) ) {
 	function script_constant_version( $package ) {

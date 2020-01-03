@@ -1,0 +1,36 @@
+$selectors: ( 'clear', 'entry-content', 'comment-content' );
+
+@mixin clearfix-selector( $selector ) {
+    .#{$selector} {
+        &:before,
+        &:after {
+            @include clearfix;
+        }
+    }
+}
+
+@each $selector in $selectors {
+    .#{unquote($selector)} {
+        &:before,
+        &:after {
+            @include clearfix;
+        }
+        &:after {
+            @include clearfix-after;
+        }
+    }
+}
+
+.site {
+    &-header,
+    &-content,
+    &-footer {
+        &:before,
+        &:after {
+            @include clearfix;
+        }
+        &:after {
+            @include clearfix-after;
+        }
+    }
+}

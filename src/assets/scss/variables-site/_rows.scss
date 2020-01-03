@@ -1,0 +1,17 @@
+@include export( 'rows' ) {
+    .row {
+        max-width: none;
+        margin: {
+            right: auto;
+            left: auto;
+        }
+        &::before,
+        &::after {
+            display: table;
+            content: ' ';
+        }
+        &::after {
+            clear: both;
+        }
+    }
+}

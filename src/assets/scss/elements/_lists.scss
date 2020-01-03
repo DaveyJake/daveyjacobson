@@ -1,0 +1,33 @@
+ul, ol {
+	margin: 0 0 1.5em 3em;
+
+    &.no-bullet,
+    &.no-bullets {
+        margin-left: 0;
+        list-style: none;
+    }
+}
+
+ul {
+	list-style: disc;
+}
+
+ol {
+	list-style: decimal;
+}
+
+li > ul,
+li > ol {
+	margin: {
+        bottom: 0;
+	    left: 1.5em;
+    }
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}

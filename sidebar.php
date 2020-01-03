@@ -6,13 +6,12 @@
  *
  * @package Davey_Jacobson_Portfolio
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
 
 if ( ! is_active_sidebar( 'sidebar' ) ) {
-	return;
+    return;
 }
 
-?>
-
-<aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar' ); ?>
-</aside><!-- #secondary -->
+echo '<aside id="secondary" class="widget-area">';
+    dynamic_sidebar( 'sidebar' );
+echo '</aside><!-- #secondary -->';

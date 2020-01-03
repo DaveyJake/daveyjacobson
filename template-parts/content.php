@@ -4,14 +4,15 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Davey_Jacobson_Portfolio
+ * @package DaveyJacobson
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
 
 ?>
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
 	<header class="entry-header">
-		<?php
+	<?php
 		if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
 		else :
@@ -22,21 +23,23 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				dj_portfolio_posted_on();
-				dj_portfolio_posted_by();
+				daveyjacobson_posted_on();
+				daveyjacobson_posted_by();
 				?>
 			</div><!-- .entry-meta -->
-		<?php endif; ?>
+            <?php
+        endif;
+    ?>
 	</header><!-- .entry-header -->
 
-	<?php dj_portfolio_post_thumbnail(); ?>
+	<?php daveyjacobson_post_thumbnail(); ?>
 
 	<div class="entry-content">
-		<?php
+	<?php
 		the_content( sprintf(
 			wp_kses(
 				/* translators: %s: Name of current post. Only visible to screen readers */
-				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'dj_portfolio' ),
+				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'daveyjacobson' ),
 				array(
 					'span' => array(
 						'class' => array(),
@@ -44,16 +47,17 @@
 				)
 			),
 			get_the_title()
-		) );
+		));
 
 		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'dj_portfolio' ),
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'daveyjacobson' ),
 			'after'  => '</div>',
-		) );
-		?>
+		));
+	?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php dj_portfolio_entry_footer(); ?>
+		<?php daveyjacobson_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
+
 </article><!-- #post-<?php the_ID(); ?> -->

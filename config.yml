@@ -1,0 +1,57 @@
+# Browsersync config
+BROWSERSYNC:
+  # URL of local development server goes here (ex. http://localsite.dev)
+  url: "http://davey.test"
+
+# Autoprefixer will make sure your CSS works with these browsers
+COMPATIBILITY:
+  - "last 2 versions"
+  - "ie >= 11"
+  - "ios >= 7"
+
+# Set to true if you want static asset revisioning, helpful for cache busting
+REVISIONING: true
+
+# Gulp will reference these paths when it copies files
+PATHS:
+  # Path to dist folder
+  dist: "dist"
+  # Paths to static assets that aren't images, CSS, or JavaScript
+  assets:
+    - "src/assets/{webfonts,stylesheets}/*"
+    - "!src/assets/{images,js,libs,scss}/*"
+  # Vendor-specific scripts to clone for use.
+  libs:
+    # Fullpage.js
+    fullpage: "src/assets/libs/fullpage/fullpage.{extensions,parallax}.{min.js,js}"
+    parallax: "src/assets/libs/parallax/*"
+    mmenuLight: "src/assets/libs/mmenuLight/*"
+  # Paths to Sass libraries, which can then be loaded with @import
+  sass:
+    - "node_modules/foundation-sites/scss"
+    - "node_modules/motion-ui/src"
+    - "node_modules/mmenu-light/src"
+  # Paths to JavaScript entry points for webpack to bundle modules
+  entries:
+    - "src/assets/js/app.js"
+    - "src/assets/js/customizer.js"
+  # Paths for the package task to include/exclude in .zip archive
+  package:
+    - "**/*"
+    - "!**/node_modules/**"
+    - "!**/packaged/**"
+    - "!**/src/**"
+    - "!**/codesniffer.ruleset.xml"
+    - "!**/composer.json"
+    - "!**/composer.lock"
+    - "!**/config.yml"
+    - "!**/config.default.yml"
+    - "!**/gulpfile.babel.js"
+    - "!**/package.json"
+    - "!**/package-lock.json"
+    - "!**/webpack.config.js"
+  # Paths for PHP CodeSniffer
+  phpcs:
+    - "**/*.php"
+    - "!wpcs"
+    - "!wpcs/**"

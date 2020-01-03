@@ -6,66 +6,28 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Davey_Jacobson_Portfolio
+ * @package DaveyJacobson
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
+<html class="no-js" <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 </head>
+
 <body <?php body_class(); ?>>
 
-<div id="<?php echo get_post_type(); ?>" class="site">
+    <div id="<?php echo ( is_front_page() ? 'front-page' : get_post_type() ); ?>" class="site no-sidebar">
 
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'dj_portfolio' ); ?></a>
+        <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'daveyjacobson' ); ?></a>
 
-	<header id="masthead" class="site-header">
+        <header id="masthead" class="site-header">
+            <a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_self"><img src="<?php echo get_template_directory_uri() . '/dist/assets/images/dj-logo-white.png' ?>" class="logo" alt="Davey Jacobson" /></a>
+            <?php get_template_parts( 'masthead', 'site-navigation' ); ?>
+        </header><!-- #masthead -->
 
-		<div class="site-branding">
-		<?php
-
-			the_custom_logo();
-
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-
-			$dj_portfolio_description = get_bloginfo( 'description', 'display' );
-
-			if ( $dj_portfolio_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $dj_portfolio_description; /* WPCS: xss ok. */ ?></p>
-                <?php
-            endif;
-
-        ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-                <?php esc_html_e( 'Primary Menu', 'dj_portfolio' ); ?>
-            </button>
-
-			<?php
-                wp_nav_menu( array(
-				    'theme_location' => 'menu-1',
-				    'menu_id'        => 'primary-menu',
-                ));
-			?>
-
-		</nav><!-- #site-navigation -->
-
-	</header><!-- #masthead -->
-
-    <div id="content" class="site-content">
+        <div id="content" class="site-content">

@@ -6,21 +6,24 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Davey_Jacobson_Portfolio
+ * @package DaveyJacobson
  */
-?>
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
 
-    </div><!-- #content -->
+    echo '</div><!-- #content -->';
 
-	<footer id="colophon" class="site-footer">
+    echo '<footer id="colophon" class="site-footer">';
 
-		<div class="site-info"></div><!-- .site-info -->
+        echo '<div class="site-info"></div><!-- .site-info -->';
 
-	</footer><!-- #colophon -->
+    echo '</footer><!-- #colophon -->';
 
-</div><?php echo '<!-- #' . get_post_type() . '-->'; ?>
+echo '</div><!-- #' . get_post_type() . '-->';
 
-<?php wp_footer(); ?>
+wp_footer();
 
-</body>
-</html>
+echo '<div id="hamburger">'; dynamic_sidebar( 'nav-bar' ); echo '</div>';
+//echo '<div id="blocker"></div>';
+
+echo '</body>';
+echo '</html>';

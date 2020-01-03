@@ -4,11 +4,14 @@
  *
  * @since 1.0.0
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed.
+
 get_header();
-get_sidebar();
-    ?>
-    <div id="front-page" class="site-main">
-        <?php echo apply_filters( 'the_content', get_post( get_the_ID() )->post_content ); ?>
-    </div>
-    <?php
+
+    echo '<div id="fp" class="site-main">';
+
+        the_sections();
+
+    echo '</div>';
+
 get_footer();

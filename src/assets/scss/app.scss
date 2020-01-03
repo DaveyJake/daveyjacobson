@@ -1,0 +1,15 @@
+@import 'style';
+@include normalize();
+
+$pages: ( home, about, portfolio, blog, contact );
+
+.fp-section {
+    font: {
+        family: $font__typekit;
+        size: 1.35em;
+    }
+}
+
+.mm-opened {
+    @include mobile-open;
+}

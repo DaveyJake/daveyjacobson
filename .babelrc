@@ -1,0 +1,10 @@
+{
+  //"ignore": ["./src/**", "./src/*"],
+  "presets": ["@babel/preset-env"],
+  "compact": "auto",
+  "plugins": [
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-modules-commonjs"
+  ]
+}

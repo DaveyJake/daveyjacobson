@@ -9,8 +9,10 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Davey_Jacobson_Portfolio
+ * @package DaveyJacobson
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
+
 get_header(); ?>
 
 	<div id="primary" class="content-area">

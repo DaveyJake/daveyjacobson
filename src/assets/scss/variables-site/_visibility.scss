@@ -1,0 +1,9 @@
+@include export( 'visibility' ) {
+    .hide {
+        display: none;
+    }
+
+    .invisible {
+        visibility: hidden;
+    }
+}

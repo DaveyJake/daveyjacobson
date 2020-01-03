@@ -1,0 +1,76 @@
+@import "colors";
+@import "typography";
+@import "structure";
+@import "columns";
+@import "visibility";
+
+$site__isProduction: false;
+$font__browser: 16;
+
+//
+// Get the background image based on the index.
+//
+@function get-background-image($images, $index: 1) {
+    $file: '';
+    $template_directory: '/wp-content/themes/daveyjacobson/dist/assets/images/';
+    $file_ext: '@2x.jpg';
+
+    $file: $file + $template_directory + nth($images, $index) + $file_ext;
+
+    @return $file;
+}
+
+//
+// Get the top bar height by screen size.
+//
+// @param {Number} $context The top bar height.
+//
+// @return The height of the top bar.
+//
+@function get-topbar-height($size) {
+    $topbar__browser: 32;
+    $topbar__mobile: 46;
+
+    @if ( $size >= 48.9375em ) {
+        @return #{$topbar__mobile}px;
+    }
+    @else if ( $size <= 48.875em ) {
+        @return #{$topbar__browser}px;
+    }
+}
+
+//
+// Convert PX to EM.
+//
+// @param {Number} $pixels Pixel measurement.
+// @param {Number} $browser-content Default: 16.
+//
+// @return {Number} The converted number of measurement.
+//
+@function em($pixels, $context: $font__browser) {
+    @return #{$pixels/$context}em;
+}
+
+//
+// Slide speed.
+//
+// @param {List}   $property List or single property value.
+// @param {Number} $duration Timing duration.
+// @param {Number} $delay    The timing delay.
+//
+// @return {mixed}
+//
+@function slide-speed($property: transform, $duration: 0.25, $delay: 0) {
+    $rule: ();
+
+    @if ( (list-separator($property) == 'comma') or (list-separator($property) == 'space') ) {
+        @each $prop in $property {
+            $rule: join(unquote('#{$prop} #{$duration}s'), $rule, 'comma');
+        }
+    }
+    @else {
+        $rule: join(unquote('#{$property} #{$duration}s ease-in-out #{$delay}s'), $rule, 'comma');
+    }
+
+    @return $rule;
+}

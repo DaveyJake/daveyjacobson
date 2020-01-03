@@ -1,0 +1,24 @@
+@include export( 'links' ) {
+    a {
+    	color: $color__link;
+        text-decoration: none;
+        outline-color: transparent;
+
+    	&:visited {
+            outline: 0;
+    	}
+    	&:hover,
+    	&:focus,
+    	&:active {
+            text-decoration: underline;
+    	}
+    	&:focus {
+    		//outline: thin dotted;
+    	   outline: 0;
+        }
+    	&:hover,
+    	&:active {
+    		outline: 0;
+    	}
+    }
+}

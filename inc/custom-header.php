@@ -8,65 +8,52 @@
  *
  * @link https://developer.wordpress.org/themes/functionality/custom-headers/
  *
- * @package Davey_Jacobson_Portfolio
+ * @package DaveyJacobson
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed.
 
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses dj_portfolio_header_style()
+ * @uses daveyjacobson_header_style()
  */
-function dj_portfolio_custom_header_setup() {
-	add_theme_support( 'custom-header', apply_filters( 'dj_portfolio_custom_header_args', array(
-		'default-image'          => '',
+function daveyjacobson_custom_header_setup() {
+	add_theme_support( 'custom-header', apply_filters( 'daveyjacobson_custom_header_args', array(
+		'default-image'          => get_template_directory_uri() . '/dist/assets/images/dj-logo.png',
 		'default-text-color'     => '000000',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'dj_portfolio_header_style',
+		'wp-head-callback'       => 'daveyjacobson_header_style',
 	) ) );
 }
-add_action( 'after_setup_theme', 'dj_portfolio_custom_header_setup' );
+add_action( 'after_setup_theme', 'daveyjacobson_custom_header_setup' );
 
-if ( ! function_exists( 'dj_portfolio_header_style' ) ) :
-	/**
-	 * Styles the header image and text displayed on the blog.
-	 *
-	 * @see dj_portfolio_custom_header_setup().
-	 */
-	function dj_portfolio_header_style() {
-		$header_text_color = get_header_textcolor();
-
-		/*
-		 * If no custom options for text are set, let's bail.
-		 * get_header_textcolor() options: Any hex value, 'blank' to hide text. Default: add_theme_support( 'custom-header' ).
-		 */
-		if ( get_theme_support( 'custom-header', 'default-text-color' ) === $header_text_color ) {
-			return;
-		}
-
-		// If we get this far, we have custom styles. Let's do this.
-		?>
-		<style type="text/css">
-		<?php
-		// Has the text been hidden?
-		if ( ! display_header_text() ) :
-			?>
-			.site-title,
-			.site-description {
-				position: absolute;
-				clip: rect(1px, 1px, 1px, 1px);
-			}
-		<?php
-		// If the user has set a custom color for the text use that.
-		else :
-			?>
-			.site-title a,
-			.site-description {
-				color: #<?php echo esc_attr( $header_text_color ); ?>;
-			}
-		<?php endif; ?>
-		</style>
-		<?php
-	}
+if ( ! function_exists( 'daveyjacobson_header_style' ) ) :
+/**
+ * Styles the header image and text displayed on the blog.
+ *
+ * @see daveyjacobson_custom_header_setup().
+ */
+function daveyjacobson_header_style() {
+    $header_text_color = get_header_textcolor();
+    /*
+     * If no custom options for text are set, let's bail.
+     * get_header_textcolor() options: Any hex value, 'blank' to hide text. Default: add_theme_support( 'custom-header' ).
+     */
+    if ( get_theme_support( 'custom-header', 'default-text-color' ) === $header_text_color ) {
+        return;
+    }
+    // If we get this far, we have custom styles. Let's do this.
+    echo '<style type="text/css">';
+    // Has the text been hidden?
+    if ( ! display_header_text() ) {
+        echo '.site-title, .site-description { position: absolute; clip: rect(1px, 1px, 1px, 1px); }';
+    }
+    // If the user has set a custom color for the text use that.
+    else {
+        echo '.site-title a, .site-description { color: #' . esc_attr( $header_text_color ) . '}';
+    }
+    echo '</style>';
+}
 endif;

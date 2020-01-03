@@ -4,25 +4,25 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Davey_Jacobson_Portfolio
+ * @package DaveyJacobson
  */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if directly accessed
 
 ?>
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php dj_portfolio_post_thumbnail(); ?>
+	<?php daveyjacobson_post_thumbnail(); ?>
 
 	<div class="entry-content">
 	<?php
 		the_content();
 
 		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'dj_portfolio' ),
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'daveyjacobson' ),
 			'after'  => '</div>',
 		) );
 	?>
@@ -35,7 +35,7 @@
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Edit <span class="screen-reader-text">%s</span>', 'dj_portfolio' ),
+					__( 'Edit <span class="screen-reader-text">%s</span>', 'daveyjacobson' ),
 					array(
 						'span' => array(
 							'class' => array(),

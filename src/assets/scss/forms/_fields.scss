@@ -1,0 +1,27 @@
+$types: text, email, url, password, search, number, tel, range, date, month, week, time, datetime, datetime-local, color;
+
+%defaults {
+    color: $color__text-input;
+    border: 1px solid $color__border-input;
+    border-radius: 3px;
+    padding: 3px;
+
+    &:focus {
+        color: $color__text-input-focus;
+    }
+}
+
+@each $type in $types {
+    input[type="#{$type}"] {
+        @extend %defaults;
+    }
+}
+
+select {
+	border: 1px solid $color__border-input;
+}
+
+textarea {
+    @extend %defaults;
+    width: 100%;
+}
