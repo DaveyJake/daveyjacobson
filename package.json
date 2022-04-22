@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "foundation-sites": "6.5.1",
-    "fullpage.js": "^3.0.8",
+    "fullpage.js": "^4.0.5",
     "isotope-layout": "^3.0.6",
     "isotope-packery": "^2.0.1",
     "jquery": "^3.4.1",
